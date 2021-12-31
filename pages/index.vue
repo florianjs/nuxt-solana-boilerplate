@@ -89,8 +89,7 @@ export default {
       publicWalletAddress: '',
     }
   },
-  async fetch() {
-    console.log('Fetch is called')
+  async created() {
     this.loading = true
     setTimeout(() => {
       try {
@@ -112,7 +111,6 @@ export default {
       this.loading = false
     }, 2000)
   },
-  fetchOnServer: false,
 
   methods: {
     async connectPhantom() {
