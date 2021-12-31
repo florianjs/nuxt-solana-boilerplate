@@ -60,7 +60,7 @@
         <p>Made by this guy</p></a
       >
       <a
-        href="https://twitter.com/icesofty"
+        href="https://github.com/Icesofty/nuxt-solana-boilerplate"
         target="_blank"
         class="flex items-center justify-center text-gray-50 space-x-4"
         ><svg
