@@ -29,8 +29,17 @@
     >
       Connect Wallet
     </button>
-    <div v-if="publicWalletAddress" class="text-gray-50">
-      You're connected {{ publicWalletAddress }}
+    <div
+      v-if="publicWalletAddress"
+      class="text-gray-50 flex flex-col items-center space-y-8"
+    >
+      <p class="text-center">
+        Welcome to the Solana network, <br />
+        <strong>{{ publicWalletAddress }}</strong>
+      </p>
+      <div class="w-3/4 rounded-lg overflow-hidden flex shadow-xl">
+        <img src="/images/welcome.gif" alt="welcome gif" class="object-cover" />
+      </div>
     </div>
     <a
       href="https://phantom.app/"
@@ -40,7 +49,9 @@
     >
       You need to download a Wallet first.
     </a>
-    <div class="absolute bottom-8 flex items-center space-x-8 justify-center">
+    <div
+      class="absolute bottom-8 flex flex-col space-y-4 lg:space-y-0 lg:flex-row items-center lg:space-x-8 justify-center"
+    >
       <a
         href="https://twitter.com/icesofty"
         target="_blank"
