@@ -49,9 +49,9 @@
       <a
         href="https://phantom.app/"
         target="_blank"
-        class="text-gray-50 underline"
+        class="text-purple-500 text-sm hover:text-purple-300"
       >
-        I don't have Phantom wallet.
+        I don't have a Phantom wallet.
       </a>
     </div>
 
