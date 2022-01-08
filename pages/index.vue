@@ -23,7 +23,7 @@
       </svg>
     </div>
     <button
-      v-if="phantomWallet && !publicWalletAddress"
+      v-if="phantom && !publicWalletAddress"
       @click="connectPhantom"
       class="bg-indigo-600 text-white font-bold rounded px-4 py-2 shadow-md uppercase"
     >
@@ -44,7 +44,7 @@
     <a
       href="https://phantom.app/"
       target="_blank"
-      v-if="!loading && !phantomWallet"
+      v-if="!loading && !phantom"
       class="text-gray-50 underline"
     >
       You need to download a Wallet first.
@@ -95,37 +95,24 @@
 export default {
   data() {
     return {
-      loading: null,
       phantomWallet: null,
       publicWalletAddress: '',
+      phantom: null,
     }
   },
   async created() {
-    this.loading = true
-    setTimeout(() => {
-      try {
-        const { solana } = window
-
-        if (solana) {
-          this.solana = solana
-
-          if (solana.isPhantom) {
-            this.phantomWallet = true
-          }
-        } else {
-          this.phantomWallet = false
-          console.log('No Phantom founded.')
-        }
-      } catch (error) {
-        console.error(error)
-      }
-      this.loading = false
-    }, 2000)
+    this.phantom = await this.$phantom
+  },
+  computed: {
+    loading() {
+      return this.phantom === null ? true : false
+    },
   },
 
   methods: {
     async connectPhantom() {
-      const response = await solana.connect()
+      const response = await this.phantom.connect()
+
       this.publicWalletAddress = response.publicKey.toString()
       console.log('Connected with Public Key:', response.publicKey.toString())
     },
