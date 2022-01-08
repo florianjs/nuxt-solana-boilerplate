@@ -1,27 +1,5 @@
 <template>
   <div class="flex flex-col items-center justify-center h-screen bg-gray-800">
-    <div v-if="loading" class="text-white items-center justify-center flex">
-      <svg
-        class="animate-spin h-7 w-7 text-white"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle
-          class="opacity-25"
-          cx="12"
-          cy="12"
-          r="10"
-          stroke="currentColor"
-          stroke-width="4"
-        ></circle>
-        <path
-          class="opacity-75"
-          fill="currentColor"
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-        ></path>
-      </svg>
-    </div>
     <button
       v-if="phantom && !publicWalletAddress"
       @click="connectPhantom"
@@ -41,14 +19,42 @@
         <img src="/images/welcome.gif" alt="welcome gif" class="object-cover" />
       </div>
     </div>
-    <a
-      href="https://phantom.app/"
-      target="_blank"
-      v-if="!phantom && !loading"
-      class="text-gray-50 underline"
+    <div
+      class="text-white items-center justify-center flex space-y-4 flex-col"
+      v-if="phantom === null"
     >
-      You need to download a Wallet first.
-    </a>
+      <div class="flex space-x-4 items-center">
+        <svg
+          class="animate-spin h-7 w-7 text-white"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            class="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            stroke-width="4"
+          ></circle>
+          <path
+            class="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+        <p>Checking ...</p>
+      </div>
+      <a
+        href="https://phantom.app/"
+        target="_blank"
+        class="text-gray-50 underline"
+      >
+        I don't have Phantom wallet.
+      </a>
+    </div>
+
     <div
       class="absolute bottom-8 flex flex-col space-y-4 lg:space-y-0 lg:flex-row items-center lg:space-x-8 justify-center"
     >
@@ -102,11 +108,6 @@ export default {
   },
   async created() {
     this.phantom = await this.$phantom
-  },
-  computed: {
-    loading() {
-      return this.phantom === null ? true : false
-    },
   },
   methods: {
     async connectPhantom() {
