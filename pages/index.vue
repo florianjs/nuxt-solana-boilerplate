@@ -44,7 +44,7 @@
     <a
       href="https://phantom.app/"
       target="_blank"
-      v-if="!loading && !phantom"
+      v-if="!phantom && !loading"
       class="text-gray-50 underline"
     >
       You need to download a Wallet first.
@@ -108,7 +108,6 @@ export default {
       return this.phantom === null ? true : false
     },
   },
-
   methods: {
     async connectPhantom() {
       const response = await this.phantom.connect()
